@@ -49,7 +49,7 @@ fun Search(
         SearchBar(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .semantics{ traversalIndex = 0f },
+                .semantics { traversalIndex = 0f },
             inputField = {
                 SearchBarDefaults.InputField(
                     query = textFieldState.text.toString(),
@@ -91,7 +91,7 @@ fun Search(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                textFieldState.edit { replace(0,length,result) }
+                                textFieldState.edit { replace(0, length, result) }
                                 onResultClick?.invoke(result)
                                 expanded = false
                             }
@@ -102,19 +102,21 @@ fun Search(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun SearchPreview(){
-//    val testTextFieldState = remember { TextFieldState() }
-//    val results = listOf(
-//        "Martillo Percutor",
-//        "Clavo de cemento",
-//        "Zapato de seguridad"
-//    )
-//
-//    Search(
-//        textFieldState = testTextFieldState,
-//        onSearch = {},
-//        searchResults = results
-//    )
-//}
+/*
+@Preview(showBackground = true)
+@Composable
+fun SearchPreview() {
+    val testTextFieldState = remember { TextFieldState() }
+    val results = listOf(
+        "Martillo Percutor",
+        "Clavo de cemento",
+        "Zapato de seguridad"
+    )
+
+    Search(
+        textFieldState = testTextFieldState,
+        onSearch = {},
+        searchResults = results
+    )
+}
+*/

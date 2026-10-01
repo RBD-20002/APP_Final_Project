@@ -47,18 +47,20 @@ fun BottomBar(
     }
 }
 
-//@Preview(showBackground = true)
-//@Composable
-//fun BottomPreview() {
-//    var listItems = listOf(
-//        BottomNavItem(title = "HOME", icon = Icons.Default.Home),
-//        BottomNavItem(title = "FAVORITE", icon = Icons.Default.Favorite),
-//        BottomNavItem(title = "PROFILE", icon = Icons.Default.AccountCircle),
-//        BottomNavItem(title = "SETTIGNS", icon = Icons.Default.Settings)
-//    )
-//    BottomBar(
-//        items = listItems,
-//        selectIndex = 0,
-//        onItemSelected = {}
-//    )
-//}
+/*
+@Preview(showBackground = true)
+@Composable
+fun BottomPreview() {
+    var listItems = listOf(
+        BottomNavItem(title = "HOME", icon = Icons.Default.Home),
+        BottomNavItem(title = "FAVORITE", icon = Icons.Default.Favorite),
+        BottomNavItem(title = "PROFILE", icon = Icons.Default.AccountCircle),
+        BottomNavItem(title = "SETTIGNS", icon = Icons.Default.Settings)
+    )
+    BottomBar(
+        items = listItems,
+        selectIndex = 0,
+        onItemSelected = {}
+    )
+}
+*/
