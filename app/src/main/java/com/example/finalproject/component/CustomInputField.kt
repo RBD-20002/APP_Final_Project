@@ -44,9 +44,13 @@ fun CustomInputField(
             modifier = Modifier.fillMaxWidth(),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = Color.DarkGray,
+                unfocusedContainerColor = Color.DarkGray,
                 focusedBorderColor = Color.Black,
+                unfocusedBorderColor = Color.Black,
                 focusedTextColor = Color.White,
-                focusedPlaceholderColor = Color.White
+                unfocusedTextColor = Color.White,
+                focusedPlaceholderColor = Color.White,
+                unfocusedPlaceholderColor = Color.White
             )
         )
     }
