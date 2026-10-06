@@ -30,7 +30,8 @@ fun LocationField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     label: String,
-    placeholder: String
+    placeholder: String,
+    readOnly: Boolean = true
 ){
     val context = LocalContext.current
 
@@ -46,6 +47,7 @@ fun LocationField(
                 onValueChange = onValueChange,
                 label = label,
                 placeholder = placeholder,
+                readOnly = readOnly,
                 modifier = Modifier
                     .weight(0.8f)
                     .padding(end = 4.dp)
@@ -56,7 +58,7 @@ fun LocationField(
                     .height(56.dp)
                     .clickable {},      //QUEDA PENDIENTE CONECTARLO CON GOOGLE MAPS
                 shape = RoundedCornerShape(18.dp),
-                border = BorderStroke(2.dp, Color.Black),
+                border = BorderStroke(5.dp, Color.Black),
                 colors = CardDefaults.cardColors(containerColor = Color.White)
             ) {
                 Box(
@@ -67,7 +69,7 @@ fun LocationField(
                         imageVector = Icons.Default.Place,
                         contentDescription = "ICON FOR LOCATION",
                         tint = Color.Black,
-                        modifier = Modifier.size(24.dp)
+                        modifier = Modifier.size(32.dp)
                     )
                 }
             }
@@ -75,7 +77,7 @@ fun LocationField(
     }
 }
 
-/*
+
 @Preview
 @Composable
 fun previewLocationField(){
@@ -86,4 +88,3 @@ fun previewLocationField(){
         placeholder = "ENTER STORE .............."
     )
 }
-*/

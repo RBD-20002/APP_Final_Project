@@ -21,7 +21,8 @@ fun CustomInputField(
     placeholder: String,
     modifier: Modifier = Modifier,
     label: String? = null,
-    singleLine: Boolean = true
+    singleLine: Boolean = true,
+    readOnly: Boolean = false
 ){
     Column(
         modifier = modifier
@@ -41,12 +42,11 @@ fun CustomInputField(
             placeholder = { Text(placeholder) },
             shape = RoundedCornerShape(12.dp),
             singleLine = singleLine,
+            readOnly = readOnly,
             modifier = Modifier.fillMaxWidth(),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedContainerColor = Color.DarkGray,
                 unfocusedContainerColor = Color.DarkGray,
-                focusedBorderColor = Color.Black,
-                unfocusedBorderColor = Color.Black,
                 focusedTextColor = Color.White,
                 unfocusedTextColor = Color.White,
                 focusedPlaceholderColor = Color.White,
@@ -56,7 +56,7 @@ fun CustomInputField(
     }
 }
 
-/*
+
 @Preview(showBackground = true)
 @Composable
 fun previewCustomInputField(){
@@ -67,4 +67,3 @@ fun previewCustomInputField(){
         placeholder = "ENTRY NAME ............."
     )
 }
-*/
