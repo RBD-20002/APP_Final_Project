@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -15,6 +16,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -23,15 +25,18 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import java.util.Calendar
 
 data class DynamicAttributeItem(
     val key: String,
     val value: String,
-    val type: AttributeType = AttributeType.TEXT
+    val type: AttributeType = AttributeType.TEXT,
 )
 
 @Composable
@@ -40,8 +45,8 @@ fun DynamicAttributeGrid(
     onKeyChange: (String) -> Unit,
     onValueChange: (String) -> Unit,
     onDelete: () -> Unit,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+) {
     val context = LocalContext.current
     var isDropdownExpanded by remember { mutableStateOf(false) }
 
@@ -53,10 +58,18 @@ fun DynamicAttributeGrid(
         OutlinedTextField(
             value = item.key,
             onValueChange = onKeyChange,
-            placeholder = { "ENTER ${ item.key }" },
+            placeholder = { Text(
+                text = "ENTER ATTRIBUTE",
+                fontWeight = FontWeight.ExtraBold
+            ) },
             shape = RoundedCornerShape(12.dp),
             singleLine = true,
-            modifier = Modifier.fillMaxWidth()
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.DarkGray,
+                unfocusedContainerColor = Color.DarkGray,
+                focusedTextColor = Color.White,
+                unfocusedTextColor = Color.White
+            )
         )
 
         Row(
@@ -68,12 +81,16 @@ fun DynamicAttributeGrid(
                 when (item.type) {
                     AttributeType.TEXT -> {
                         OutlinedTextField(
-                            value = item.key,
+                            value = item.value,
                             onValueChange = onValueChange,
-                            placeholder = { "ENTER ${ item.key }" },
+                            placeholder = { Text("ENTER VALUE") },
                             shape = RoundedCornerShape(12.dp),
                             singleLine = true,
-                            modifier = Modifier.fillMaxWidth()
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedContainerColor = Color.White,
+                                unfocusedContainerColor = Color.White
+                            )
                         )
                     }
 
@@ -82,8 +99,8 @@ fun DynamicAttributeGrid(
 
                         val dateDialog = DatePickerDialog(
                             context,
-                            {_, year, month, dayOfMonth ->
-                                onValueChange("$dayOfMonth/${month+1}/$year")
+                            { _, year, month, dayOfMonth ->
+                                onValueChange("$dayOfMonth/${month + 1}/$year")
                             },
                             calendar.get(Calendar.YEAR),
                             calendar.get(Calendar.MONTH),
@@ -94,7 +111,7 @@ fun DynamicAttributeGrid(
                             value = item.value,
                             onValueChange = {},
                             readOnly = true,
-                            placeholder = { "SELECT DAY" },
+                            placeholder = { Text("SELECT DAY") },
                             shape = RoundedCornerShape(12.dp),
                             singleLine = true,
                             modifier = Modifier
@@ -109,7 +126,11 @@ fun DynamicAttributeGrid(
                                         contentDescription = "DATE",
                                     )
                                 }
-                            }
+                            },
+                            colors = OutlinedTextFieldDefaults.colors(
+                                focusedContainerColor = Color.White,
+                                unfocusedContainerColor = Color.White
+                            )
                         )
                     }
 
@@ -119,7 +140,7 @@ fun DynamicAttributeGrid(
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                        ){
+                        ) {
                             OutlinedTextField(
                                 value = item.value,
                                 onValueChange = {},
@@ -129,10 +150,15 @@ fun DynamicAttributeGrid(
                                 singleLine = true,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable{
+                                    .clickable {
                                         isDropdownExpanded = true
-                                    }
+                                    },
+                                colors = OutlinedTextFieldDefaults.colors(
+                                    focusedContainerColor = Color.White,
+                                    unfocusedContainerColor = Color.White
+                                )
                             )
+
                             DropdownMenu(
                                 expanded = isDropdownExpanded,
                                 onDismissRequest = { isDropdownExpanded = false }
@@ -153,6 +179,73 @@ fun DynamicAttributeGrid(
                     }
                 }
             }
+            ButtomDelete(
+                onClick = onDelete
+            )
         }
     }
 }
+
+/*
+@Preview
+@Composable
+fun previewDynamicAttributeGrid() {
+    var textItem by remember {
+        mutableStateOf(
+            DynamicAttributeItem(
+                key = "TALLA",
+                value = "XL",
+                type = AttributeType.TEXT
+            )
+        )
+    }
+
+    var dateItem by remember {
+        mutableStateOf(
+            DynamicAttributeItem(
+                key = "FECHA COMPRA",
+                value = "15/10/2026",
+                type = AttributeType.DATE
+            )
+        )
+    }
+
+    var statusItem by remember {
+        mutableStateOf(
+            DynamicAttributeItem(
+                key = "DISPONIBILIDAD",
+                value = "ACTIVO",
+                type = AttributeType.STATUS
+            )
+        )
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        DynamicAttributeGrid(
+            item = textItem,
+            onKeyChange = { textItem = textItem.copy(key = it) },
+            onValueChange = { textItem = textItem.copy(value = it) },
+            onDelete = {}
+        )
+
+        DynamicAttributeGrid(
+            item = dateItem,
+            onKeyChange = { dateItem = dateItem.copy(key = it) },
+            onValueChange = { dateItem = dateItem.copy(value = it) },
+            onDelete = {}
+        )
+
+        DynamicAttributeGrid(
+            item = statusItem,
+            onKeyChange = { statusItem = statusItem.copy(key = it) },
+            onValueChange = { statusItem = statusItem.copy(value = it) },
+            onDelete = {}
+        )
+    }
+}
+*/
