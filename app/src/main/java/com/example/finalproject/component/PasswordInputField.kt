@@ -23,8 +23,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 
 @Composable
 fun PasswordInputField(
@@ -43,6 +43,7 @@ fun PasswordInputField(
             Text(
                 text = label.uppercase(),
                 fontWeight = FontWeight.ExtraBold,
+                fontSize = 18.sp
             )
         }
 
@@ -61,7 +62,7 @@ fun PasswordInputField(
 
                 IconButton(
                     onClick = {
-                        isPasswordVisible = isPasswordVisible
+                        isPasswordVisible = !isPasswordVisible
                     }
                 ) {
                     Icon(
