@@ -57,7 +57,7 @@ fun ProductFieldSection(
 /*
 @Preview(showBackground = true)
 @Composable
-fun previewProductFieldSection(){
+fun PreviewProductFieldSection(){
     ProductFieldSection(
         name = "",
         onNameChange = {},

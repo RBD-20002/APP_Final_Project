@@ -114,7 +114,7 @@ fun ProductCardItem(
 /*
 @Preview(showBackground = true)
 @Composable
-fun previewProductCardItem() {
+fun PreviewProductCardItem() {
     Column(
         modifier = Modifier.padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)

@@ -86,7 +86,7 @@ fun PasswordInputField(
 /*
 @Preview(showBackground = true)
 @Composable
-fun previewPasswordInputField(){
+fun PreviewPasswordInputField(){
     var password by remember { mutableStateOf("Prueba123") }
 
     PasswordInputField(

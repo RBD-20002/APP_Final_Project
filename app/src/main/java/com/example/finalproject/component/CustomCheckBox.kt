@@ -55,7 +55,7 @@ fun CustomCheckBox(
 /*
 @Preview
 @Composable
-fun previewCustomCheckBox(){
+fun PreviewCustomCheckBox(){
     var isChecked by remember { mutableStateOf(true) }
 
     CustomCheckBox(

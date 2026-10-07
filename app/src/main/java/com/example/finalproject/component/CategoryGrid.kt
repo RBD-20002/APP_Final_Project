@@ -75,7 +75,7 @@ fun CategoryGrid(
 /*
 @Preview(showBackground = true)
 @Composable
-fun previewCategoryGrid(){
+fun PreviewCategoryGrid(){
     val categories = listOf(
         CategoryUiModel("1", "Clothing", "Clothing"),
         CategoryUiModel("2", "Food", "Food"),

@@ -77,10 +77,10 @@ fun LocationField(
     }
 }
 
-
+/*
 @Preview
 @Composable
-fun previewLocationField(){
+fun PreviewLocationField(){
     LocationField(
         value = "",
         onValueChange = {},
@@ -88,3 +88,4 @@ fun previewLocationField(){
         placeholder = "ENTER STORE .............."
     )
 }
+*/

@@ -57,7 +57,7 @@ fun ProductList(
 /*
 @Preview
 @Composable
-fun previewProductList(){
+fun PreviewProductList(){
     val sampleProductList = listOf(
         ProductUiModel(id = "1", name = "MARTILLO", quantity = 16, attributes = mapOf("CATEGORY" to "TOOLS", "PRICE" to "15.60€", "MATERIAL" to "ACERO")),
         ProductUiModel(id = "2", name = "MARTILLO", quantity = 16, attributes = mapOf("CATEGORY" to "TOOLS", "PRICE" to "15.60€", "MATERIAL" to "ACERO")),

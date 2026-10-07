@@ -94,7 +94,7 @@ fun CategoryCard(
 /*
 @Preview(showBackground = false)
 @Composable
-fun previewCard() {
+fun PreviewCard() {
     Row(
         modifier = Modifier.padding(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)

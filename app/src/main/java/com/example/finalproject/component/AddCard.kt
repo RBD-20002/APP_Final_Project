@@ -53,7 +53,7 @@ fun AddCard(
 /*
 @Preview(showBackground = false)
 @Composable
-fun previewAddCard() {
+fun PreviewAddCard() {
     AddCard(
         onClick = {},
         modifier = Modifier.size(110.dp)

@@ -56,10 +56,10 @@ fun CustomInputField(
     }
 }
 
-
+/*
 @Preview(showBackground = true)
 @Composable
-fun previewCustomInputField(){
+fun PreviewCustomInputField(){
     CustomInputField(
         value = "",
         onValueChange = {},
@@ -67,3 +67,4 @@ fun previewCustomInputField(){
         placeholder = "ENTRY NAME ............."
     )
 }
+*/

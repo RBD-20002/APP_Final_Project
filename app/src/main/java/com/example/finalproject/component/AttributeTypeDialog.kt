@@ -124,7 +124,7 @@ private fun TypeOptionCard(
 /*
 @Preview(showBackground = true)
 @Composable
-fun previewAttributeTypeDialog(){
+fun PreviewAttributeTypeDialog(){
     AttributeTypeDialog(
         onDismissRequest = {},
         onTypeSelected = {}

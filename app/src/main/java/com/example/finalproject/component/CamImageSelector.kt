@@ -100,7 +100,7 @@ fun CamImageSelector(
 /*
 @Preview(showBackground = true)
 @Composable
-fun previewCamImageSelector(){
+fun PreviewCamImageSelector(){
     CamImageSelector(
         selectImageUri = null,
         defaultCategoryIcon = Icons.Default.Category,

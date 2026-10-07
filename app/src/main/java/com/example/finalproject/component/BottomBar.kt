@@ -50,7 +50,7 @@ fun BottomBar(
 /*
 @Preview(showBackground = true)
 @Composable
-fun BottomPreview() {
+fun PreviewBottomBar() {
     var listItems = listOf(
         BottomNavItem(title = "HOME", icon = Icons.Default.Home),
         BottomNavItem(title = "FAVORITE", icon = Icons.Default.Favorite),

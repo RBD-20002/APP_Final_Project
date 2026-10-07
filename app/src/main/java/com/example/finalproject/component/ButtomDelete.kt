@@ -38,10 +38,12 @@ fun ButtomDelete(
     }
 }
 
+/*
 @Preview
 @Composable
-fun previewButtomDelete(){
+fun PreviewButtomDelete(){
     ButtomDelete(
         onClick = {}
     )
 }
+*/

@@ -105,7 +105,7 @@ fun Search(
 /*
 @Preview(showBackground = true)
 @Composable
-fun SearchPreview() {
+fun PreviewSearch() {
     val testTextFieldState = remember { TextFieldState() }
     val results = listOf(
         "Martillo Percutor",

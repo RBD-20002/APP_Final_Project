@@ -55,21 +55,10 @@ fun DynamicAttributeGrid(
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        OutlinedTextField(
-            value = item.key,
-            onValueChange = onKeyChange,
-            placeholder = { Text(
-                text = "ENTER ATTRIBUTE",
-                fontWeight = FontWeight.ExtraBold
-            ) },
-            shape = RoundedCornerShape(12.dp),
-            singleLine = true,
-            colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = Color.DarkGray,
-                unfocusedContainerColor = Color.DarkGray,
-                focusedTextColor = Color.White,
-                unfocusedTextColor = Color.White
-            )
+        Text(
+            text = item.key.uppercase(),
+            fontWeight = FontWeight.ExtraBold,
+            color = Color.White
         )
 
         Row(
@@ -189,7 +178,7 @@ fun DynamicAttributeGrid(
 /*
 @Preview
 @Composable
-fun previewDynamicAttributeGrid() {
+fun PreviewDynamicAttributeGrid() {
     var textItem by remember {
         mutableStateOf(
             DynamicAttributeItem(

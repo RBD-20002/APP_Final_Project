@@ -73,7 +73,7 @@ fun ActionButtons(
 /*
 @Preview(showBackground = true)
 @Composable
-fun previewActionButtons() {
+fun PreviewActionButtons() {
     ActionButtons(
         onCancel = {},
         onSubmit = {}

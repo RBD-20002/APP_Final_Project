@@ -100,9 +100,10 @@ fun StatusDropdownSelector(
     }
 }
 
+/*
 @Preview
 @Composable
-fun previewStatusDropdownSelector(){
+fun PreviewStatusDropdownSelector(){
     var currentStatus by remember { mutableStateOf("GUARDADA") }
 
     StatusDropdownSelector(
@@ -110,3 +111,4 @@ fun previewStatusDropdownSelector(){
         onStatusSelected = { currentStatus = it }
     )
 }
+*/
