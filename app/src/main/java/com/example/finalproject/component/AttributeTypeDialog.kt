@@ -1,5 +1,6 @@
 package com.example.finalproject.component
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,16 +25,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
+import com.example.finalproject.R
 
-enum class AttributeType(val label: String, val icon: ImageVector){
-    TEXT("TEXT", Icons.Default.TextFields),
-    DATE("DATE", Icons.Default.DateRange),
-    STATUS("STATUS", Icons.Default.ChecklistRtl)
+enum class AttributeType(@StringRes val labelRes: Int, val icon: ImageVector){
+    TEXT(R.string.attr_type_text, Icons.Default.TextFields),
+    DATE(R.string.attr_type_date, Icons.Default.DateRange),
+    STATUS(R.string.attr_type_status, Icons.Default.ChecklistRtl)
 }
 
 @Composable
@@ -59,14 +61,16 @@ fun AttributeTypeDialog(
                 verticalArrangement = Arrangement.spacedBy(14.dp)
             ) {
                 Text(
-                    text = "ADD ATTRIBUTE",
+                    text = stringResource(id = R.string.attr_dialog_add_tittle),
                     fontWeight = FontWeight.ExtraBold,
-                    fontSize = 20.sp
+                    fontSize = 20.sp,
+                    color = Color.Black
                 )
 
                 Text(
-                    text = "SELECT THE TYPE OF ATTRIBUTE",
-                    fontSize = 14.sp
+                    text = stringResource(id = R.string.attr_dialog_select_type),
+                    fontSize = 14.sp,
+                    color = Color.Black
                 )
 
                 AttributeType.entries.forEach { type ->
@@ -104,7 +108,7 @@ private fun TypeOptionCard(
         ) {
             Icon(
                 imageVector = type.icon,
-                contentDescription = type.label,
+                contentDescription = stringResource(id = type.labelRes),
                 tint = Color.Black,
                 modifier = Modifier.size(24.dp)
             )
@@ -112,7 +116,7 @@ private fun TypeOptionCard(
             Spacer(modifier = Modifier.width(16.dp))
 
             Text(
-                text = type.label,
+                text = stringResource(id = type.labelRes),
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 color = Color.Black
@@ -120,14 +124,3 @@ private fun TypeOptionCard(
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewAttributeTypeDialog(){
-    AttributeTypeDialog(
-        onDismissRequest = {},
-        onTypeSelected = {}
-    )
-}
-*/

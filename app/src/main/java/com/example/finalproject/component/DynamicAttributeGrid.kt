@@ -1,43 +1,32 @@
 package com.example.finalproject.component
 
 import android.app.DatePickerDialog
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.finalproject.R
+import com.example.finalproject.model.DynamicAttributeItem
 import java.util.Calendar
-
-data class DynamicAttributeItem(
-    val key: String,
-    val value: String,
-    val type: AttributeType = AttributeType.TEXT,
-)
 
 @Composable
 fun DynamicAttributeGrid(
@@ -48,16 +37,14 @@ fun DynamicAttributeGrid(
     modifier: Modifier = Modifier,
 ) {
     val context = LocalContext.current
-    var isDropdownExpanded by remember { mutableStateOf(false) }
 
     Column(
-        modifier = modifier
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = modifier.fillMaxWidth()
     ) {
         Text(
             text = item.key.uppercase(),
             fontWeight = FontWeight.ExtraBold,
+            fontSize = 18.sp,
             color = Color.White
         )
 
@@ -72,99 +59,81 @@ fun DynamicAttributeGrid(
                         OutlinedTextField(
                             value = item.value,
                             onValueChange = onValueChange,
-                            placeholder = { Text("ENTER VALUE") },
+                            placeholder = {
+                                stringResource(id = R.string.attr_dialog_new_desc)
+                            },
                             shape = RoundedCornerShape(12.dp),
                             singleLine = true,
                             modifier = Modifier.fillMaxWidth(),
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedContainerColor = Color.White,
-                                unfocusedContainerColor = Color.White
+                                focusedContainerColor = Color.DarkGray,
+                                unfocusedContainerColor = Color.DarkGray,
+                                focusedTextColor = Color.White,
+                                unfocusedTextColor = Color.White,
+                                focusedPlaceholderColor = Color.LightGray,
+                                unfocusedPlaceholderColor = Color.LightGray
                             )
                         )
                     }
 
                     AttributeType.DATE -> {
                         val calendar = Calendar.getInstance()
-
-                        val dateDialog = DatePickerDialog(
-                            context,
-                            { _, year, month, dayOfMonth ->
-                                onValueChange("$dayOfMonth/${month + 1}/$year")
-                            },
-                            calendar.get(Calendar.YEAR),
-                            calendar.get(Calendar.MONTH),
-                            calendar.get(Calendar.DAY_OF_MONTH)
-                        )
+                        val dateDialog = remember {
+                            DatePickerDialog(
+                                context,
+                                { _, year, month, dayOfMonth ->
+                                    val formattedDate = String.format("%02d/%02d/%d", dayOfMonth, month + 1, year)
+                                    onValueChange(formattedDate)
+                                },
+                                calendar.get(Calendar.YEAR),
+                                calendar.get(Calendar.MONTH),
+                                calendar.get(Calendar.DAY_OF_MONTH)
+                            )
+                        }
 
                         OutlinedTextField(
-                            value = item.value,
+                            value = item.value.ifBlank { "" },
                             onValueChange = {},
                             readOnly = true,
-                            placeholder = { Text("SELECT DAY") },
+                            placeholder = {
+                                stringResource(id = R.string.form_attr_date_placeholder)
+                            },
                             shape = RoundedCornerShape(12.dp),
                             singleLine = true,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { dateDialog.show() },
+                            modifier = Modifier.fillMaxWidth(),
                             trailingIcon = {
-                                IconButton(
-                                    onClick = { dateDialog.show() }
-                                ) {
+                                IconButton(onClick = { dateDialog.show() }) {
                                     Icon(
                                         imageVector = Icons.Default.DateRange,
-                                        contentDescription = "DATE",
+                                        contentDescription = "FECHA",
+                                        tint = Color.White
                                     )
                                 }
                             },
                             colors = OutlinedTextFieldDefaults.colors(
-                                focusedContainerColor = Color.White,
-                                unfocusedContainerColor = Color.White
+                                focusedContainerColor = Color.DarkGray,
+                                unfocusedContainerColor = Color.DarkGray,
+                                focusedTextColor = Color.White,
+                                unfocusedTextColor = Color.White,
+                                focusedPlaceholderColor = Color.LightGray,
+                                unfocusedPlaceholderColor = Color.LightGray
                             )
                         )
                     }
 
                     AttributeType.STATUS -> {
-                        val statusOption = listOf("ACTIVO", "INACTIVO", "PENDIENTE")
-
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                        ) {
-                            OutlinedTextField(
-                                value = item.value,
-                                onValueChange = {},
-                                readOnly = true,
-                                placeholder = { Text("SELECT STATUS") },
-                                shape = RoundedCornerShape(12.dp),
-                                singleLine = true,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .clickable {
-                                        isDropdownExpanded = true
-                                    },
-                                colors = OutlinedTextFieldDefaults.colors(
-                                    focusedContainerColor = Color.White,
-                                    unfocusedContainerColor = Color.White
-                                )
+                        StatusDropdownSelector(
+                            selectedStatus = item.value.ifBlank { stringResource(id = R.string.status_none) },
+                            onStatusSelected = { newStatus ->
+                                onValueChange(newStatus)
+                            },
+                            label = "",
+                            options = listOf(
+                                stringResource(id = R.string.status_none),
+                                stringResource(id = R.string.status_saved),
+                                stringResource(id = R.string.status_borrowed)
                             )
-
-                            DropdownMenu(
-                                expanded = isDropdownExpanded,
-                                onDismissRequest = { isDropdownExpanded = false }
-                            ) {
-                                statusOption.forEach { option ->
-                                    DropdownMenuItem(
-                                        text = {
-                                            Text(option, fontWeight = FontWeight.ExtraBold)
-                                        },
-                                        onClick = {
-                                            onValueChange(option)
-                                            isDropdownExpanded = false
-                                        }
-                                    )
-                                }
-                            }
-                        }
+                        )
                     }
                 }
             }
@@ -174,67 +143,3 @@ fun DynamicAttributeGrid(
         }
     }
 }
-
-/*
-@Preview
-@Composable
-fun PreviewDynamicAttributeGrid() {
-    var textItem by remember {
-        mutableStateOf(
-            DynamicAttributeItem(
-                key = "TALLA",
-                value = "XL",
-                type = AttributeType.TEXT
-            )
-        )
-    }
-
-    var dateItem by remember {
-        mutableStateOf(
-            DynamicAttributeItem(
-                key = "FECHA COMPRA",
-                value = "15/10/2026",
-                type = AttributeType.DATE
-            )
-        )
-    }
-
-    var statusItem by remember {
-        mutableStateOf(
-            DynamicAttributeItem(
-                key = "DISPONIBILIDAD",
-                value = "ACTIVO",
-                type = AttributeType.STATUS
-            )
-        )
-    }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        DynamicAttributeGrid(
-            item = textItem,
-            onKeyChange = { textItem = textItem.copy(key = it) },
-            onValueChange = { textItem = textItem.copy(value = it) },
-            onDelete = {}
-        )
-
-        DynamicAttributeGrid(
-            item = dateItem,
-            onKeyChange = { dateItem = dateItem.copy(key = it) },
-            onValueChange = { dateItem = dateItem.copy(value = it) },
-            onDelete = {}
-        )
-
-        DynamicAttributeGrid(
-            item = statusItem,
-            onKeyChange = { statusItem = statusItem.copy(key = it) },
-            onValueChange = { statusItem = statusItem.copy(value = it) },
-            onDelete = {}
-        )
-    }
-}
-*/

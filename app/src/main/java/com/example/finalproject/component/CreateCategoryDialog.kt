@@ -35,8 +35,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.example.finalproject.R
 
 data class CategoryIconOption(
     val id: String,
@@ -79,7 +81,7 @@ fun CreateCategoryDialog(
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Text(
-                    text = "NEW CATEGORY",
+                    text =stringResource(id = R.string.category_dialog_name_title),
                     style = MaterialTheme.typography.labelLarge.copy(
                         fontWeight = FontWeight.Bold
                     )
@@ -120,7 +122,9 @@ fun CreateCategoryDialog(
                 OutlinedTextField(
                     value = categoryName,
                     onValueChange = { categoryName = it },
-                    label = { Text("CATEGORY NAME") },
+                    label = {
+                        stringResource(R.string.category_dialog_name_title)
+                    },
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -132,22 +136,11 @@ fun CreateCategoryDialog(
                             onConfirmation(categoryName, selectedIcon.id)
                         }
                     },
-                    cancelText = "CANCEL",
-                    submitText = "CREATE",
+                    cancelText = stringResource(id = R.string.btn_cancel),
+                    submitText = stringResource(id = R.string.btn_create),
                     isSubmitEnabled = categoryName.isNotBlank()
                 )
             }
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewCreateCategoryDialog(){
-    CreateCategoryDialog(
-        onDismissRequest = {},
-        onConfirmation = {_, _ ->}
-    )
-}
-*/

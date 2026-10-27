@@ -11,7 +11,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -32,18 +31,8 @@ fun ButtomDelete(
         ) {
             Icon(
                 imageVector = Icons.Default.Delete,
-                contentDescription = "DELETE ATTRIBUTE"
+                contentDescription = "BORRAR ATRIBUTO"
             )
         }
     }
 }
-
-/*
-@Preview
-@Composable
-fun PreviewButtomDelete(){
-    ButtomDelete(
-        onClick = {}
-    )
-}
-*/

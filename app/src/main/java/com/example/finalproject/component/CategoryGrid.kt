@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -18,14 +17,8 @@ import androidx.compose.material.icons.filled.Restaurant
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-data class CategoryUiModel(
-    val id:String,
-    val name:String,
-    val iconkey:String
-)
+import com.example.finalproject.model.Category
 
 fun getCategoryIcon(iconkey: String): ImageVector{
     return when(iconkey){
@@ -40,8 +33,8 @@ fun getCategoryIcon(iconkey: String): ImageVector{
 
 @Composable
 fun CategoryGrid(
-    categories: List<CategoryUiModel>,
-    onCategoryClick: (CategoryUiModel) -> Unit,
+    categories: List<Category>,
+    onCategoryClick: (Category) -> Unit,
     onAddCategoryClick: () -> Unit,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(16.dp),
@@ -55,11 +48,11 @@ fun CategoryGrid(
     ) {
         items(
             items = categories,
-            key = { categories -> categories.id }
+            key = { it.idCategory }
         ) { category ->
             CategoryCard(
-                title = category.name,
-                icon = getCategoryIcon(category.iconkey),
+                title = category.catName,
+                icon = getCategoryIcon(category.catIconKey),
                 onClick = { onCategoryClick(category) }
             )
         }
@@ -71,23 +64,3 @@ fun CategoryGrid(
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewCategoryGrid(){
-    val categories = listOf(
-        CategoryUiModel("1", "Clothing", "Clothing"),
-        CategoryUiModel("2", "Food", "Food"),
-        CategoryUiModel("3", "Tools", "Tools"),
-        CategoryUiModel("4", "Electronics", "Electronics"),
-        CategoryUiModel("5", "Health", "Health")
-    )
-
-    CategoryGrid(
-        categories = categories,
-        onCategoryClick = {},
-        onAddCategoryClick = {}
-    )
-}
-*/

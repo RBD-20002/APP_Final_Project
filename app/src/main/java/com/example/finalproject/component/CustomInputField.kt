@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -32,7 +31,7 @@ fun CustomInputField(
                 text = label.uppercase(),
                 fontWeight = FontWeight.ExtraBold,
                 fontSize = 18.sp,
-                color = Color.Black
+                color = Color.White
             )
         }
 
@@ -49,22 +48,9 @@ fun CustomInputField(
                 unfocusedContainerColor = Color.DarkGray,
                 focusedTextColor = Color.White,
                 unfocusedTextColor = Color.White,
-                focusedPlaceholderColor = Color.White,
-                unfocusedPlaceholderColor = Color.White
+                focusedPlaceholderColor = Color.LightGray,
+                unfocusedPlaceholderColor = Color.LightGray
             )
         )
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewCustomInputField(){
-    CustomInputField(
-        value = "",
-        onValueChange = {},
-        label = "LABEL",
-        placeholder = "ENTRY NAME ............."
-    )
-}
-*/

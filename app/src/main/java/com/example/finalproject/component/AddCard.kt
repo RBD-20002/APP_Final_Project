@@ -42,21 +42,10 @@ fun AddCard(
         ) {
             Icon(
                 imageVector = Icons.Default.Add,
-                contentDescription = "ADD",
+                contentDescription = "AGREGAR",
                 tint = Color.White,
                 modifier = Modifier.size(50.dp)
             )
         }
     }
 }
-
-/*
-@Preview(showBackground = false)
-@Composable
-fun PreviewAddCard() {
-    AddCard(
-        onClick = {},
-        modifier = Modifier.size(110.dp)
-    )
-}
-*/
