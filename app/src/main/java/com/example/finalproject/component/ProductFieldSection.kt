@@ -5,8 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.finalproject.R
 
 @Composable
 fun ProductFieldSection(
@@ -18,8 +19,9 @@ fun ProductFieldSection(
     onPriceChange: (String) -> Unit,
     location: String,
     onLocationChange: (String) -> Unit,
-    modifier: Modifier = Modifier
-){
+    modifier: Modifier = Modifier,
+    readOnly: Boolean = false
+) {
     Column(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp)
@@ -27,46 +29,33 @@ fun ProductFieldSection(
         CustomInputField(
             value = name,
             onValueChange = onNameChange,
-            label = "NAME",
-            placeholder = "ENTER NAME.............."
+            label = stringResource(id = R.string.form_name_label),
+            placeholder = if (readOnly) "" else stringResource(id = R.string.form_name_placeholder),
+            readOnly = readOnly
         )
 
         CustomInputField(
             value = quantity,
             onValueChange = onQuantityChange,
-            label = "QUANTITY",
-            placeholder = "ENTER QUANTITY................."
+            label = stringResource(id = R.string.form_quantity_label),
+            placeholder = if (readOnly) "" else stringResource(id = R.string.form_quantity_placeholder),
+            readOnly = readOnly
         )
 
         CustomInputField(
             value = price,
             onValueChange = onPriceChange,
-            label = "PRICE",
-            placeholder = "ENTER PRICE......................."
+            label = stringResource(id = R.string.form_price_label),
+            placeholder = if (readOnly) "" else stringResource(id = R.string.form_price_placeholder),
+            readOnly = readOnly
         )
 
         LocationField(
             value = location,
             onValueChange = onLocationChange,
-            label = "STORE LOCATION",
-            placeholder = "ENTER STORE LOCATION................"
+            label = stringResource(id = R.string.form_location_label),
+            placeholder = if (readOnly) "" else stringResource(id = R.string.form_location_placeholder),
+            readOnly = readOnly
         )
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewProductFieldSection(){
-    ProductFieldSection(
-        name = "",
-        onNameChange = {},
-        quantity = "",
-        onQuantityChange = {},
-        price = "",
-        onPriceChange = {},
-        location = "",
-        onLocationChange = {}
-    )
-}
-*/

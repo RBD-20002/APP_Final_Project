@@ -43,7 +43,8 @@ fun PasswordInputField(
             Text(
                 text = label.uppercase(),
                 fontWeight = FontWeight.ExtraBold,
-                fontSize = 18.sp
+                fontSize = 18.sp,
+                color = Color.White
             )
         }
 
@@ -77,24 +78,9 @@ fun PasswordInputField(
                 unfocusedContainerColor = Color.DarkGray,
                 focusedTextColor = Color.White,
                 unfocusedTextColor = Color.White,
-                focusedPlaceholderColor = Color.White,
-                unfocusedPlaceholderColor = Color.White
+                focusedPlaceholderColor = Color.LightGray,
+                unfocusedPlaceholderColor = Color.LightGray
             )
         )
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewPasswordInputField(){
-    var password by remember { mutableStateOf("Prueba123") }
-
-    PasswordInputField(
-        value = password,
-        onValueChange = { password = it },
-        placeholder = "ENTRY PASSWORD",
-        label = "PASSWORD"
-    )
-}
-*/
