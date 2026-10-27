@@ -1,24 +1,12 @@
 package com.example.finalproject.component
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
-
-data class BottomNavItem(
-    val title: String,
-    val icon: ImageVector,
-    val route: String = "",
-)
+import com.example.finalproject.model.BottomNavItem
 
 @Composable
 fun BottomBar(
@@ -46,21 +34,3 @@ fun BottomBar(
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewBottomBar() {
-    var listItems = listOf(
-        BottomNavItem(title = "HOME", icon = Icons.Default.Home),
-        BottomNavItem(title = "FAVORITE", icon = Icons.Default.Favorite),
-        BottomNavItem(title = "PROFILE", icon = Icons.Default.AccountCircle),
-        BottomNavItem(title = "SETTIGNS", icon = Icons.Default.Settings)
-    )
-    BottomBar(
-        items = listItems,
-        selectIndex = 0,
-        onItemSelected = {}
-    )
-}
-*/
