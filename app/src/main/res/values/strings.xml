@@ -1,3 +1,162 @@
 <resources>
     <string name="app_name">Final Project</string>
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--            GENERAL & COMPONENTES           -->
+    <!-- ══════════════════════════════════════════ -->
+
+    <!--                  BOTTOM                   -->
+    <string name="btn_cancel">CANCELAR</string>
+    <string name="btn_save">GUARDAR</string>
+    <string name="btn_create">CREAR</string>
+    <string name="btn_delete">ELIMINAR</string>
+    <string name="dropdown_select">SELECCIONAR</string>
+
+    <!--                PLACEHOLDER                -->
+    <string name="search_placeholder">Buscar....</string>
+
+    <!--             BOOTOM NAVIGATION             -->
+    <string name="btn_nav_categories">Categorías</string>
+    <string name="btn_nav_products">Productos</string>
+    <string name="btm_nav_loguot">Salir</string>
+
+    <!--               MAPS & CAMERA               -->
+    <string name="erro_map_not_found">App de mapas no econtrada</string>
+    <string name="content_descrip_image">IMAGEN</string>
+    <string name="content_descrip_camera">CAMARA</string>
+
+    <!--                  DIALOGS                  -->
+    <string name="dialog_delete_title">¿ELIMINAR PRODUCTO?</string>
+    <string name="dialog_delete_description">Esta acción no se puede deshacer. ¿Seguro que quieres eliminarlo?</string>
+
+    <!--         DYNAMIC ATTRIBUTES DIALOG         -->
+    <string name="attr_dialog_new_title">NUEVO ATRIBUTO</string>
+    <string name="attr_dialog_new_desc">Ingrese el titulo del nuevo atributo</string>
+    <string name="attr_dialog_placeholder_ej">Ej: Marca, Material.....</string>
+    <string name="attr_dialog_add_tittle">AGREGAR ATRIBUTO</string>
+    <string name="attr_dialog_select_type">Selecciona el tipo del nuevo atributo</string>
+
+    <!--              ATTRIBUTE TYPES              -->
+    <string name="attr_type_text">TEXTO</string>
+    <string name="attr_type_date">FECHA DE COMPRA</string>
+    <string name="attr_type_status">ESTADO</string>
+
+    <!--              STATUS OPTIONS               -->
+    <string name="status_none">NINGUNO</string>
+    <string name="status_saved">GUARDADO</string>
+    <string name="status_borrowed">PRESTADO</string>
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--                    LOGIN                   -->
+    <!-- ══════════════════════════════════════════ -->
+    <string name="login_title">INICIAR SESION</string>
+
+    <string name="login_email_label">CORREO</string>
+    <string name="login_email_placeholder">ejemplo@correo.com</string>
+
+    <string name="login_password_label">CONTRASEÑA</string>
+    <string name="login_password_placeholder">***************</string>
+
+    <string name="login_remember_me">RECORDAR INICIO DE SESION</string>
+
+    <string name="login_btn_register">CREAR CUENTA</string>
+    <string name="login_btn_enter">INGRESAR</string>
+
+    <string name="login_error_empty">Por favor, completa todos los campos</string>
+    <string name="login_error_credentials">Correo o contraseña incorrectos</string>
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--                  REGISTER                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <string name="register_title">CREAR CUENTA</string>
+    
+    <string name="register_name_label">NOMBRE</string>
+    <string name="register_name_placeholder">Ej: Erick Cartman</string>
+    
+    <string name="register_email_label">CORREO ELECTRONICO</string>
+    <string name="register_email_placeholder">ejemplo@correo.com</string>
+
+    <string name="register_password_label">CONTRASEÑA</string>
+    <string name="register_password_placeholder">***************</string>
+    <string name="register_confirm_label">CONFIRMAR CONTRASEÑA</string>
+
+    <string name="register_btn_back">VOLVER</string>
+    <string name="register_btn_submit">REGISTRAR</string>
+
+    <string name="register_error_mismatch">Las contraseñas no coinciden</string>
+    <string name="register_error_network">Error al registrar usuario</string>
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--                  CATEGORY                  -->
+    <!-- ══════════════════════════════════════════ -->
+    <string name="category_search_placeholder">Buscar categoría......</string>
+
+    <string name="category_dialog_title">NUEVA CATEGORIA</string>
+
+    <string name="category_dialog_name_title">NOMBRE DE LA CATEGORIA</string>
+
+    <string name="category_dialog_btn_cancel">CANCELAR</string>
+    <string name="category_dialog_btn_create">CREAR</string>
+
+    <string name="category_error_load">Error al cargar categorías</string>
+    <string name="category_error_create">Error al crear la categoría</string>
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--                PRODUCT LIST                -->
+    <!-- ══════════════════════════════════════════ -->
+    <string name="list_search_in_category">BUSCAR EN %1$%</string>
+    <string name="list_search_all">BUSCAR PRODUCTOS</string>
+
+    <string name="list_empty_state">No hay productos en esta categoría</string>
+    <string name="list_error_load">ERROR AL CARGAR PRODUCTOS DE LA CATEGORIA</string>
+
+    <!--              PRODUCT CARD ITEM             -->
+    <string name="card_quantity_format">x%1$d</string>
+    <string name="card_location_format">LUGAR: %1$s</string>
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--               PRODUCT DETAIL               -->
+    <!-- ══════════════════════════════════════════ -->
+    <string name="detail_search_placeholder">Buscar......</string>
+
+    <string name="detail_not_found">Producto no encontrado</string>
+    <string name="detail_error_not_in_list">El producto no se encontró en la lista</string>
+    <string name="detail_error_load">ERROR AL CARGAR PRODUCTO</string>
+    <string name="detail_error_empty_delete">No hay producto para eliminar</string>
+    <string name="detail_error_delete">ERROR AL ELIMINAR PRODUCTO</string>
+
+    <string name="detail_delete_confirm_desc">¿Seguro que deseas eliminar %1$s?</string>
+
+
+    <!-- ══════════════════════════════════════════ -->
+    <!--               PRODUCT DETAIL               -->
+    <!-- ══════════════════════════════════════════ -->
+    <string name="form_name_label">PRODUCTO</string>
+    <string name="form_name_placeholder">INTRODUCE PRODUCTO...........</string>
+
+    <string name="form_quantity_label">CANTIDAD</string>
+    <string name="form_quantity_placeholder">INTRODUCE CANTIDAD...........</string>
+
+    <string name="form_price_label">PRECIO</string>
+    <string name="form_price_placeholder">INTRODUCE PRECIO...........</string>
+
+    <string name="form_location_label">TIENDA</string>
+    <string name="form_location_placeholder">INTRODUCE TIENDA...........</string>
+
+    <!--             DYNAMIC ATTRIBUTES             -->
+    <string name="form_attr_value_placeholder">INTRODUCE VALOR...........</string>
+    <string name="form_attr_date_placeholder">SELECCIONA FECHA</string>
+
+    <!--                   ERRORS                   -->
+    <string name="form_erro_attr_limit">Solo puedes añadir un atribuo de tipo %1$s</string>
+    <string name="form_error_missing_ids">Error: Faltan los datos de categoría o usuario.</string>
+    <string name="form_error_missing_fields">Completa nombre, cantidad, precio y mercado con valores válidos.</string>
+    <string name="form_error_update">Error al actualizar el producto</string>
+    <string name="form_error_create">Error al crear el producto</string>
+    <string name="form_error_load">Error al cargar el producto</string>
 </resources>
