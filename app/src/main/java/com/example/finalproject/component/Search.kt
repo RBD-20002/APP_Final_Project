@@ -3,6 +3,7 @@ package com.example.finalproject.component
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.input.TextFieldState
@@ -19,15 +20,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.isTraversalGroup
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.traversalIndex
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.example.finalproject.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,10 +38,17 @@ fun Search(
     onSearch: (String) -> Unit,
     searchResults: List<String>,
     modifier: Modifier = Modifier,
-    placeholderText: String = "Buscar...",
+    placeholderText: String = stringResource(R.string.list_search_in_category, textFieldState.text),
+    isExpanded: Boolean = false,
+    onExpandedChange: ((Boolean) -> Unit) ?= null,
     onResultClick: ((String) -> Unit)? = null
 ){
-    var expanded by rememberSaveable { mutableStateOf(false) }
+    var expanded by rememberSaveable { mutableStateOf(isExpanded) }
+    val currendExpanded = onExpandedChange?.let { isExpanded } ?: expanded
+    val handleExpandedChange: (Boolean) -> Unit = { newExpanded ->
+        expanded = newExpanded
+        onExpandedChange?.invoke(newExpanded)
+    }
 
     Box(
         modifier = modifier
@@ -58,28 +67,29 @@ fun Search(
                     },
                     onSearch = {
                         onSearch(textFieldState.text.toString())
-                        expanded = false
+                        handleExpandedChange(false)
                     },
-                    expanded = expanded,
-                    onExpandedChange = { expanded = it },
+                    expanded = currendExpanded,
+                    onExpandedChange = handleExpandedChange,
                     placeholder = { Text(placeholderText) },
                     trailingIcon = {
                         IconButton(
                             onClick = {
                                 onSearch(textFieldState.text.toString())
-                                expanded = false
+                                handleExpandedChange(false)
                             }
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Search,
-                                contentDescription = "SEARCH"
+                                contentDescription = "BUSCAR"
                             )
                         }
                     }
                 )
             },
-            expanded = expanded,
-            onExpandedChange = { expanded = it }
+            expanded = currendExpanded,
+            onExpandedChange = handleExpandedChange,
+            windowInsets = WindowInsets(0.dp)
         ){
             Column(
                 modifier = Modifier
@@ -93,7 +103,7 @@ fun Search(
                             .clickable {
                                 textFieldState.edit { replace(0, length, result) }
                                 onResultClick?.invoke(result)
-                                expanded = false
+                                handleExpandedChange(false)
                             }
                     )
                 }
@@ -101,22 +111,3 @@ fun Search(
         }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Composable
-fun PreviewSearch() {
-    val testTextFieldState = remember { TextFieldState() }
-    val results = listOf(
-        "Martillo Percutor",
-        "Clavo de cemento",
-        "Zapato de seguridad"
-    )
-
-    Search(
-        textFieldState = testTextFieldState,
-        onSearch = {},
-        searchResults = results
-    )
-}
-*/
