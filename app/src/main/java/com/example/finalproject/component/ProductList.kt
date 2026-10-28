@@ -8,21 +8,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
-data class ProductUiModel(
-    val id: String,
-    val name: String,
-    val quantity: Int,
-    val attributes: Map<String, String>
-)
+import com.example.finalproject.model.Product
 
 @Composable
 fun ProductList(
-    products: List<ProductUiModel>,
-    onProductClick: (ProductUiModel) -> Unit,
+    products: List<Product>,
+    onProductClick: (Product) -> Unit,
     onAddProductClick: () -> Unit,
+    onIncreaseQuantity: (Product) -> Unit,
+    onDecreaseQuantity: (Product) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -32,14 +27,20 @@ fun ProductList(
     ) {
         items(
             items = products,
-            key = { product ->  product.id }
+            key = { product ->  product.idProduct }
         ){
             product ->
             ProductCardItem(
-                title = product.name,
-                quantity = product.quantity,
-                attributes = product.attributes,
-                onClick = { onProductClick(product) }
+                title = product.proName,
+                quantity = product.proAmount,
+                location = product.proMarketName,
+                price = product.proPrice,
+                status = product.proStatus,
+                imageUrl = product.imageUrl,
+                attributes = product.dynamicAttributes.mapValues { it.value.toString().replace("\"", "") },
+                onClick = { onProductClick(product) },
+                onIncrease = { onIncreaseQuantity(product) },
+                onDecrease = { onDecreaseQuantity(product) }
             )
         }
 
@@ -53,23 +54,3 @@ fun ProductList(
         }
     }
 }
-
-/*
-@Preview
-@Composable
-fun PreviewProductList(){
-    val sampleProductList = listOf(
-        ProductUiModel(id = "1", name = "MARTILLO", quantity = 16, attributes = mapOf("CATEGORY" to "TOOLS", "PRICE" to "15.60€", "MATERIAL" to "ACERO")),
-        ProductUiModel(id = "2", name = "MARTILLO", quantity = 16, attributes = mapOf("CATEGORY" to "TOOLS", "PRICE" to "15.60€", "MATERIAL" to "ACERO")),
-        ProductUiModel(id = "3", name = "MARTILLO", quantity = 16, attributes = mapOf("CATEGORY" to "TOOLS", "PRICE" to "15.60€", "MATERIAL" to "ACERO")),
-        ProductUiModel(id = "4", name = "MARTILLO", quantity = 16, attributes = mapOf("CATEGORY" to "TOOLS", "PRICE" to "15.60€", "MATERIAL" to "ACERO")),
-        ProductUiModel(id = "5", name = "MARTILLO", quantity = 16, attributes = mapOf("CATEGORY" to "TOOLS", "PRICE" to "15.60€", "MATERIAL" to "ACERO"))
-    )
-
-    ProductList(
-        products = sampleProductList,
-        onAddProductClick = {},
-        onProductClick = {}
-    )
-}
-*/
