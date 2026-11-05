@@ -5,9 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.finalproject.model.SessionViewModel
 import com.example.finalproject.navigation.AppNavHost
@@ -22,8 +25,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             FinalProjectTheme {
                 Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .paint(
+                            painter = painterResource(id = R.drawable.fondo_4),
+                            contentScale = ContentScale.Crop
+                        ),
+                    color = Color.Transparent
                 ) {
                     val sessionViewModel: SessionViewModel = hiltViewModel()
                     AppNavHost(sessionViewModel = sessionViewModel)
