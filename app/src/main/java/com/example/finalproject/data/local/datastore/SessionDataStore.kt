@@ -1,4 +1,4 @@
-package com.example.finalproject.data.local.datastrore
+package com.example.finalproject.data.local.datastore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -29,9 +29,10 @@ class SessionDataStore(private val dataStore: DataStore<Preferences>) {
             val idUser = preferences[SessionPreferences.KEY_ID_USER]
             val userName = preferences[SessionPreferences.KEY_USER_NAME]
             val userEmail = preferences[SessionPreferences.KEY_USER_EMAIL]
+            val token = preferences[SessionPreferences.KEY_TOKEN]
 
-            if (!idUser.isNullOrBlank() && !userName.isNullOrBlank() && !userEmail.isNullOrBlank()) {
-                UserSession(idUser = idUser, userName = userName, userEmail = userEmail)
+            if (!idUser.isNullOrBlank() && !userName.isNullOrBlank() && !userEmail.isNullOrBlank() && !token.isNullOrBlank()) {
+                UserSession(idUser = idUser, userName = userName, userEmail = userEmail, token = token)
             } else {
                 null
             }
@@ -42,11 +43,16 @@ class SessionDataStore(private val dataStore: DataStore<Preferences>) {
             preferences[SessionPreferences.KEY_ID_USER] = user.idUser
             preferences[SessionPreferences.KEY_USER_NAME] = user.userName
             preferences[SessionPreferences.KEY_USER_EMAIL] = user.userEmail
+            preferences[SessionPreferences.KEY_TOKEN] = user.token
         }
     }
 
     suspend fun getUserId(): String? {
         return userSession.map { it?.idUser }.firstOrNull()
+    }
+
+    suspend fun getToken(): String? {
+        return userSession.map { it?.token }.firstOrNull()
     }
 
     suspend fun clearSession() {

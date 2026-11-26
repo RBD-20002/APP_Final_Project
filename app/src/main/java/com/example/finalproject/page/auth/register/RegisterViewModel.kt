@@ -62,11 +62,13 @@ class RegisterViewModel @Inject constructor(
         viewModelScope.launch {
             _uiState.update { it.copy(isLoading = true, errorMessage = null) }
 
-            try {
-                authRepository.register(name, email, password)
+            val result = authRepository.register(name, email, password)
 
+            result.onSuccess {
                 _uiState.update { it.copy(isLoading = false, isSuccess = true) }
-            } catch (e: Exception) {
+            }
+
+            result.onFailure { e ->
                 _uiState.update {
                     it.copy(
                         isLoading = false,
