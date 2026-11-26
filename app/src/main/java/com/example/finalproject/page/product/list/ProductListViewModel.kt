@@ -1,5 +1,6 @@
 package com.example.finalproject.page.product.list
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalproject.data.remote.dto.product.ProductUpdateDTO
@@ -9,14 +10,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import com.example.finalproject.data.repository.product.ProductRepository
+import com.example.finalproject.domain.usecase.CsvImportUseCase
+import com.example.finalproject.domain.usecase.PdfExportUseCase
 import com.example.finalproject.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.serialization.json.JsonPrimitive
 import javax.inject.Inject
+import com.example.finalproject.data.local.datastrore.SessionDataStore
 
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
-    private val productRepository: ProductRepository
+    private val productRepository: ProductRepository,
+    private val pdfExportUseCase: PdfExportUseCase,
+    private val csvImportUseCase: CsvImportUseCase,
+    private val sessionDataStore: SessionDataStore
 ): ViewModel() {
 
     private val _uiState = MutableStateFlow(ProductListUiState())
@@ -48,6 +55,12 @@ class ProductListViewModel @Inject constructor(
                 if (event.product.proAmount > 0) {
                     updateProductQuantity(event.product, event.product.proAmount - 1)
                 }
+            }
+            is ProductListUiEvent.OnExportPdfClick -> {
+                exportPdf(event.uri)
+            }
+            is ProductListUiEvent.OnImportCsvClick -> {
+                importCsv(event.uri)
             }
         }
     }
@@ -174,6 +187,72 @@ class ProductListViewModel @Inject constructor(
                         isLoading = false,
                         errorMessage = e.localizedMessage ?: "Error al actualizar la cantidad"
                     )
+                }
+            }
+        }
+    }
+
+    private fun exportPdf(uri: Uri) {
+        val currentProducts = _uiState.value.filteredProducts
+        if (currentProducts.isEmpty()) {
+            _uiState.update { it.copy(errorMessage = "No hay productos para exportar") }
+            return
+        }
+
+        viewModelScope.launch {
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+            val result = pdfExportUseCase(uri, currentProducts)
+
+            result.onSuccess {
+                _uiState.update { it.copy(isLoading = false) }
+            }
+
+            result.onFailure { e ->
+                _uiState.update {
+                    it.copy(isLoading = false, errorMessage = "Error al exportar PDF: ${e.message}")
+                }
+            }
+        }
+    }
+
+    private fun importCsv(uri: Uri) {
+        val state = _uiState.value
+        val idCategory = state.idCategory
+
+        viewModelScope.launch {
+            val idUser = sessionDataStore.getUserId()
+            if (idUser.isNullOrBlank()) {
+                _uiState.update { it.copy(errorMessage = "Sesión no iniciada.") }
+                return@launch
+            }
+
+            _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+
+            val parseResult = csvImportUseCase(uri, idCategory, idUser)
+
+            parseResult.onSuccess { parsedProducts ->
+                var hasErrors = false
+
+                for (dto in parsedProducts) {
+                    val createResult = productRepository.createProduct(dto)
+                    if (createResult.isFailure) {
+                        hasErrors = true
+                        break
+                    }
+                }
+
+                if (hasErrors) {
+                    _uiState.update {
+                        it.copy(isLoading = false, errorMessage = "Error de red al subir algunos productos.")
+                    }
+                } else {
+                    loadProductsByCategory(idUser, idCategory, state.catName)
+                }
+            }
+
+            parseResult.onFailure { e ->
+                _uiState.update {
+                    it.copy(isLoading = false, errorMessage = e.message ?: "Error al leer el archivo")
                 }
             }
         }

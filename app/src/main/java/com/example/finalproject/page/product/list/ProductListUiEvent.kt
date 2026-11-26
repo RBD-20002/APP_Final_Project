@@ -1,5 +1,6 @@
 package com.example.finalproject.page.product.list
 
+import android.net.Uri
 import com.example.finalproject.model.Product
 
 sealed interface ProductListUiEvent {
@@ -10,4 +11,6 @@ sealed interface ProductListUiEvent {
     data object OnClearError: ProductListUiEvent
     data class OnIncreaseQuantity(val product: Product): ProductListUiEvent
     data class OnDecreaseQuantity(val product: Product): ProductListUiEvent
+    data class OnExportPdfClick(val uri: Uri): ProductListUiEvent
+    data class OnImportCsvClick(val uri: Uri): ProductListUiEvent
 }

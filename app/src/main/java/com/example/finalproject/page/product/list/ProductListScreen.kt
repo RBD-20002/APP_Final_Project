@@ -1,5 +1,7 @@
 package com.example.finalproject.page.product.list
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,13 +16,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.finalproject.component.ProductList
 import com.example.finalproject.component.Search
 import com.example.finalproject.model.Product
 import androidx.compose.ui.unit.sp
 import com.example.finalproject.R
+import com.example.finalproject.component.FileActionButtons
 
 @Composable
 fun ProductListScreen(
@@ -31,6 +33,16 @@ fun ProductListScreen(
     modifier: Modifier = Modifier
 ) {
     val searchState = rememberTextFieldState(initialText = uiState.searchQuery)
+    val exportPdfLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.CreateDocument("application/pdf")
+    ) { uri ->
+        uri?.let { onEvent(ProductListUiEvent.OnExportPdfClick(it)) }
+    }
+    val importCsvLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.GetContent()
+    ) { uri ->
+        uri?.let { onEvent(ProductListUiEvent.OnImportCsvClick(it)) }
+    }
 
     Box(
         modifier = modifier
@@ -57,6 +69,16 @@ fun ProductListScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
+            )
+
+            FileActionButtons(
+                onImportClick = {
+                    importCsvLauncher.launch("*/*")
+                },
+                onExportClick = {
+                    exportPdfLauncher.launch("Listado_Producto.pdf")
+                },
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
             )
 
             if (uiState.errorMessage != null) {
