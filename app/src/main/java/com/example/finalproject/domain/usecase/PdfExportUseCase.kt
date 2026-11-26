@@ -14,6 +14,7 @@ import com.itextpdf.layout.properties.UnitValue
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.json.JsonPrimitive
 import javax.inject.Inject
 
 class PdfExportUseCase @Inject constructor(
@@ -67,7 +68,7 @@ class PdfExportUseCase @Inject constructor(
                     }
 
                     product.dynamicAttributes.forEach { (key, value) ->
-                        val cleanValue = value.toString().replace("\"", "")
+                        val cleanValue = (value as? JsonPrimitive)?.content ?: value.toString()
                         append("${key.uppercase()}: $cleanValue\n")
                     }
                 }.trim()

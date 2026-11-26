@@ -38,7 +38,7 @@ class ProductFormViewModel @Inject constructor(
                             val p = list.find { it.idProduct == event.idProduct }
                             if (p != null) {
                                 val attributes = p.dynamicAttributes.map { (key, value) ->
-                                    val strVal = value.toString().replace("\"", "")
+                                    val strVal = (value as? JsonPrimitive)?.content ?: value.toString()
                                     val type = when {
                                         strVal in listOf("NONE", "SAVED", "BORROWED", "GUARDADO", "PRESTADA", "PRESTADO", "NINGUNO") -> AttributeType.STATUS
                                         strVal.matches(Regex("""\d{1,2}/\d{1,2}/\d{4}""")) -> AttributeType.DATE

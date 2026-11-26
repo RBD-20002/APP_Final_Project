@@ -17,6 +17,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.serialization.json.JsonPrimitive
 import javax.inject.Inject
 import com.example.finalproject.data.local.datastore.SessionDataStore
+import kotlinx.serialization.json.JsonElement
 
 @HiltViewModel
 class ProductListViewModel @Inject constructor(
@@ -159,8 +160,8 @@ class ProductListViewModel @Inject constructor(
                 imageUrl = product.imageUrl ?: "",
                 idCategory = product.idCategory,
                 idUser = product.idUser,
-                dynamicAttributes = product.dynamicAttributes.entries.associate {
-                    it.key to JsonPrimitive(it.value.toString())
+                dynamicAttributes = product.dynamicAttributes.mapValues { (_, value) ->
+                    value as? JsonElement ?: JsonPrimitive(value.toString())
                 }
             )
             val result = productRepository.updateProduct(updateDTO)

@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.finalproject.model.Product
+import kotlinx.serialization.json.JsonPrimitive
 
 @Composable
 fun ProductList(
@@ -37,7 +38,7 @@ fun ProductList(
                 price = product.proPrice,
                 status = product.proStatus,
                 imageUrl = product.imageUrl,
-                attributes = product.dynamicAttributes.mapValues { it.value.toString().replace("\"", "") },
+                attributes = product.dynamicAttributes.mapValues { (it.value as? JsonPrimitive)?.content ?: it.value.toString() },
                 onClick = { onProductClick(product) },
                 onIncrease = { onIncreaseQuantity(product) },
                 onDecrease = { onDecreaseQuantity(product) }

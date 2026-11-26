@@ -42,6 +42,7 @@ import com.example.finalproject.component.DeleteConfirmDialog
 import com.example.finalproject.component.ProductFieldSection
 import com.example.finalproject.component.Search
 import com.example.finalproject.model.Product
+import kotlinx.serialization.json.JsonPrimitive
 
 @Composable
 fun ProductDetailScreen(
@@ -137,7 +138,7 @@ fun ProductDetailScreen(
 
                             product.dynamicAttributes.forEach { (key, value) ->
                                 CustomInputField(
-                                    value = value.toString().replace("\"", ""),
+                                    value = (value as? JsonPrimitive)?.content ?: value.toString(),
                                     onValueChange = {},
                                     placeholder = "",
                                     label = key,
