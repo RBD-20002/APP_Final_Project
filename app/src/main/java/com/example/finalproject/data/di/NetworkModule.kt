@@ -1,8 +1,10 @@
 package com.example.finalproject.data.di
 
+import com.example.finalproject.data.local.datastore.SessionDataStore
 import com.example.finalproject.data.remote.api.AuthApiService
 import com.example.finalproject.data.remote.api.CategoryApiService
 import com.example.finalproject.data.remote.api.ProductApiService
+import com.example.finalproject.data.remote.interceptor.AuthInterceptor
 import com.example.finalproject.data.remote.interceptor.NetworkLogginInterceptor
 import dagger.Module
 import dagger.Provides
@@ -36,8 +38,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
+    fun provideOkHttpClient(sessionDataStore: SessionDataStore): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor(sessionDataStore = sessionDataStore))
             .addInterceptor(NetworkLogginInterceptor.create())
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
