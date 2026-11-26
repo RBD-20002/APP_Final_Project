@@ -16,7 +16,7 @@ import com.example.finalproject.model.Product
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.serialization.json.JsonPrimitive
 import javax.inject.Inject
-import com.example.finalproject.data.local.datastrore.SessionDataStore
+import com.example.finalproject.data.local.datastore.SessionDataStore
 
 @HiltViewModel
 class ProductListViewModel @Inject constructor(

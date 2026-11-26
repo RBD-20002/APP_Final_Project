@@ -1,4 +1,4 @@
-package com.example.finalproject.model // Cambia esto al paquete real de tu SessionViewModel si es distinto
+package com.example.finalproject.model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

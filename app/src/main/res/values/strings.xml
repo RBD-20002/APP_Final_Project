@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Final Project</string>
+    <string name="app_name">StockBox</string>
 
     <!-- ══════════════════════════════════════════ -->
     <!--            GENERAL & COMPONENTES           -->
@@ -108,7 +108,7 @@
     <!-- ══════════════════════════════════════════ -->
     <!--                PRODUCT LIST                -->
     <!-- ══════════════════════════════════════════ -->
-    <string name="list_search_in_category">BUSCAR EN %1$%</string>
+    <string name="list_search_in_category">BUSCAR EN %1$s</string>
     <string name="list_search_all">BUSCAR PRODUCTOS</string>
 
     <string name="list_empty_state">No hay productos en esta categoría</string>

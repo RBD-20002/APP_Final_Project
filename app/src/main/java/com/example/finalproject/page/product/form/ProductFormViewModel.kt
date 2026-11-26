@@ -3,7 +3,7 @@ package com.example.finalproject.page.product.form
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.finalproject.component.AttributeType
-import com.example.finalproject.data.local.datastrore.SessionDataStore
+import com.example.finalproject.data.local.datastore.SessionDataStore
 import com.example.finalproject.data.remote.dto.product.ProductCreateDTO
 import com.example.finalproject.data.remote.dto.product.ProductUpdateDTO
 import com.example.finalproject.data.repository.product.ProductRepository

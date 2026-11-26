@@ -6,5 +6,6 @@ import kotlinx.serialization.Serializable
 data class UserResponseDTO (
     val idUser: String,
     val userName: String,
-    val userEmail: String
+    val userEmail: String,
+    val token: String
 )

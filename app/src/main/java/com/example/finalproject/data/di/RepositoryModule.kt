@@ -1,6 +1,6 @@
 package com.example.finalproject.data.di
 
-import com.example.finalproject.data.local.datastrore.SessionDataStore
+import com.example.finalproject.data.local.datastore.SessionDataStore
 import com.example.finalproject.data.remote.api.AuthApiService
 import com.example.finalproject.data.remote.api.CategoryApiService
 import com.example.finalproject.data.remote.api.ProductApiService

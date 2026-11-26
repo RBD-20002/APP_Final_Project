@@ -1,8 +1,8 @@
 package com.example.finalproject.data.di
 
 import android.content.Context
-import com.example.finalproject.data.local.datastrore.SessionDataStore
-import com.example.finalproject.data.local.datastrore.sessionDataStore
+import com.example.finalproject.data.local.datastore.SessionDataStore
+import com.example.finalproject.data.local.datastore.sessionDataStore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,6 +1,6 @@
 package com.example.finalproject.data.repository.category
 
-import com.example.finalproject.data.local.datastrore.SessionDataStore
+import com.example.finalproject.data.local.datastore.SessionDataStore
 import com.example.finalproject.data.remote.api.CategoryApiService
 import com.example.finalproject.data.remote.dto.category.CategoryCreateDTO
 import com.example.finalproject.data.remote.dto.category.CategoryResponseDTO

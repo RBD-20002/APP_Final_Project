@@ -1,6 +1,6 @@
 package com.example.finalproject.data.repository.auth
 
-import com.example.finalproject.data.local.datastrore.SessionDataStore
+import com.example.finalproject.data.local.datastore.SessionDataStore
 import com.example.finalproject.data.remote.api.AuthApiService
 import com.example.finalproject.data.remote.dto.auth.UserCreateDTO
 import com.example.finalproject.data.remote.dto.auth.UserLoginDTO
@@ -21,7 +21,7 @@ class AuthRepositoryImpl (
 
             if (response.isSuccessful && response.body() != null) {
                 val dto = response.body()!!
-                val userSession = UserSession(idUser = dto.idUser, userName = dto.userName, userEmail = dto.userEmail)
+                val userSession = UserSession(idUser = dto.idUser, userName = dto.userName, userEmail = dto.userEmail, token = dto.token)
                 sessionDataStore.saveSession(userSession)
                 Result.success(userSession)
 
@@ -41,7 +41,7 @@ class AuthRepositoryImpl (
 
             if(response.isSuccessful && response.body() != null) {
                 val dto = response.body()!!
-                val userSession = UserSession(idUser = dto.idUser, userName = dto.userName, userEmail = dto.userEmail)
+                val userSession = UserSession(idUser = dto.idUser, userName = dto.userName, userEmail = dto.userEmail, token = dto.token)
                 sessionDataStore.saveSession(userSession)
                 Result.success(userSession)
 
