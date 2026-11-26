@@ -55,6 +55,8 @@ dependencies {
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.navigation.compose)
 
+    implementation("com.itextpdf:itext7-core:7.2.5")
+
     // HILT (desde TOML)
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
